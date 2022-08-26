@@ -160,5 +160,3 @@ class Hitbox(val points: List<Point>) {
     }
 
 }
-
-
