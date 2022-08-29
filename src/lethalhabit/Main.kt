@@ -37,7 +37,7 @@ inline fun measureTime(action: () -> Unit): Double {
 }
 
 fun randomHitbox(): Hitbox {
-    val vertices = Random.nextInt(3, 6)
+    val vertices = Random.nextInt(3, 8)
     val points = Array(vertices) { Point(Random.nextInt(X), Random.nextInt(Y)) }
     return Hitbox(points.toList())
 }

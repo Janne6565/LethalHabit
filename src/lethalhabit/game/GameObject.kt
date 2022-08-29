@@ -1,3 +1,9 @@
 package lethalhabit.game
 
-interface GameObject
+import lethalhabit.util.Point
+
+interface GameObject {
+    var position: Point
+
+    fun tick()
+}

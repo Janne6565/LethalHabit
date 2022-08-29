@@ -1,5 +1,7 @@
 package lethalhabit.hitbox
 
+import lethalhabit.util.Point
+import lethalhabit.util.Edge
 import lethalhabit.util.*
 
 class Hitbox(val points: List<Point>) {
@@ -8,6 +10,14 @@ class Hitbox(val points: List<Point>) {
         val nextCorner = points.getOrNull(i + 1) ?: points[0]
         Edge(corner, nextCorner)
     }
+
+    val xMax = points.maxOf { it.x }
+    val xMin = points.minOf { it.x }
+    val yMax = points.maxOf { it.y }
+    val yMin = points.minOf { it.y }
+
+    val width = xMax - xMin
+    val height = yMax - yMin
 
     fun collides(other: Hitbox): Boolean {
         for (point in points) {
@@ -25,7 +35,8 @@ class Hitbox(val points: List<Point>) {
     }
 
     fun containsPoint(point: Point): Boolean {
-        val (x, y) = point
+        val x = point.x
+        val y = point.y
         val alreadyIntersectedLeft = arrayListOf<Point>()
         val alreadyIntersectedRight = arrayListOf<Point>()
         val alreadyIntersectedUp = arrayListOf<Point>()
@@ -158,5 +169,7 @@ class Hitbox(val points: List<Point>) {
         }
         return left.isOdd && right.isOdd && up.isOdd && down.isOdd
     }
+
+    fun translated(by: Point) = Hitbox(points.map { it.translated(by) })
 
 }
